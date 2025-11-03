@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     // Build headers — equivalent to your previous getHeaders() logic
     const headers = {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${API_KEY}`,
+      Authorization: `Basic ${Buffer.from(`${API_KEY}:`).toString("base64")}`,
     };
 
     // Call external API
@@ -32,7 +32,10 @@ export default async function handler(req, res) {
     console.log("Fetched User Data:", response.data);
     res.status(200).json(response.data);
   } catch (error) {
-    console.error("Error fetching user data:", error.response?.data || error.message);
+    console.error(
+      "Error fetching user data:",
+      error.response?.data || error.message
+    );
     res.status(500).json({ error: "Failed to fetch user data" });
   }
 }
