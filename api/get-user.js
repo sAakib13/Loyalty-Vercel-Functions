@@ -1,5 +1,5 @@
 // /api/user-data.js
-import axios from "axios";
+const axios = require("axios");
 
 export default async function handler(req, res) {
   // Allow only GET requests
